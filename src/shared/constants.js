@@ -16,5 +16,8 @@ export default {
   LOCAL_STORAGE: {
     SESSION_KEY: 'credit-card-rewards-session',
     REMEMBER_ME_KEY: 'credit-card-rewards-remember-me'
+  },
+  PUB_SUB: {
+    LOGOUT: 'LOGOUT'
   }
 };

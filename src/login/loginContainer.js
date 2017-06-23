@@ -4,7 +4,6 @@ import { login } from './actions';
 import { Link, Redirect } from 'react-router-dom';
 import LoginForm from './loginForm';
 import apiClient from '../api/apiClient';
-import axios from 'axios';
 import CONSTANTS from '../shared/constants';
 
 class LoginContainer extends React.Component {
@@ -14,12 +13,19 @@ class LoginContainer extends React.Component {
     this.state = {
       username: '',
       password: '',
-      isLoginSuccessful: false
+      isLoginSuccessful: false,
+      redirect: { pathname: '/' }
     };
 
     this.onLoginClick = this.onLoginClick.bind(this);
     this.onUsernameChanged = this.onUsernameChanged.bind(this);
     this.onPasswordChanged = this.onPasswordChanged.bind(this);
+  }
+
+  componentWillReceiveProps() {
+    if(this.props.location.state && this.props.location.state.from) {
+      this.setState({ redirect: this.props.location.state.from });
+    }
   }
 
   onUsernameChanged(event) {
@@ -46,10 +52,6 @@ class LoginContainer extends React.Component {
 
   render()
   {
-    let redirect = { from: { pathname: '/' } };
-    if(this.props.location.state && this.props.location.state.from) {
-      redirect = this.props.location.state.from;
-    }
     return (
       !this.state.isLoginSuccessful ? (
         <div>
@@ -58,7 +60,7 @@ class LoginContainer extends React.Component {
           onSubmit={this.onLoginClick} />
         </div>
       ) : (
-        <Redirect to={redirect}/>
+        <Redirect to={this.state.redirect}/>
       )
     );
   }

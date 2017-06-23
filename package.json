@@ -17,6 +17,7 @@
     "axios": "^0.16.1",
     "babel-polyfill": "^6.23.0",
     "prop-types": "^15.5.8",
+    "pubsub-js": "^1.5.7",
     "react": "^15.5.4",
     "react-dom": "^15.5.4",
     "react-redux": "^5.0.4",
@@ -59,12 +60,12 @@
     "rimraf": "2.5.2",
     "style-loader": "0.13.1",
     "url-loader": "0.5.7",
-    "webpack": "1.13.0",
+    "webpack": "1.14.0",
     "webpack-dev-middleware": "1.6.1",
     "webpack-hot-middleware": "2.10.0"
   },
   "repository": {
     "type": "git",
-    "url": "TODO"
+    "url": "https://github.com/bschneier/credit-cards-front-end"
   }
 }

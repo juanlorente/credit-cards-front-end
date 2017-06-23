@@ -23,7 +23,6 @@ class PrivateRoute extends React.Component {
   }
 
   componentWillReceiveProps() {
-    console.log('calling will receive props')
     this.setState({ loadedPersistedSession : false });
   }
 
@@ -50,7 +49,6 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = dispatch => {
   return {
     loadPersistedSession: (sessionId, user) => {
-      console.log('loading persisted session');
       dispatch(login(sessionId, user));
     }
   };
