@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { Navbar, Nav, NavItem, NavDropdown, MenuItem } from 'react-bootstrap';
 
 class NavMenu extends React.Component {
   constructor() {
@@ -10,28 +11,21 @@ class NavMenu extends React.Component {
   {
     if(this.props.isLoggedIn) {
       return (
-        <nav className="nav-menu">
-          <ul className="menu-list">
-            <li className="menu-item selected">
-              <a href="">Shop</a>
-            </li>
-            <li className="menu-item">
-              <a href="">Deals</a>
-            </li>
-            <li className="menu-item">
-              <a href="">Credit Cards</a>
-            </li>
-            <li className="menu-item">
-              <a href="">Merchants</a>
-            </li>
-            <li className="menu-item">
-              <a href="">Profile</a>
-            </li>
-            <li className="menu-item">
-              <a href="">Logout</a>
-            </li>
-          </ul>
-        </nav>
+        <Navbar collapseOnSelect bsClass="cc-nav-menu navbar">
+          <Navbar.Header>
+            <Navbar.Toggle />
+          </Navbar.Header>
+          <Navbar.Collapse>
+            <Nav>
+              <NavItem eventKey={1}>Shop</NavItem>
+              <NavItem eventKey={2}>Deals</NavItem>
+              <NavItem eventKey={3}>Credit Cards</NavItem>
+              <NavItem eventKey={4}>Merchants</NavItem>
+              <NavItem eventKey={5}>Profile</NavItem>
+              <NavItem eventKey={6}>Logout</NavItem>
+            </Nav>
+          </Navbar.Collapse>
+        </Navbar>
       );
     }
 

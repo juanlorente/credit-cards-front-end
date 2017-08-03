@@ -50,15 +50,22 @@ class LoginContainer extends React.Component {
     }, { userName: this.state.username, password: this.state.password });
   }
 
+  validateFormValues() {
+    if(this.state.username && this.state.password) {
+      return 'success';
+    }
+    else {
+      return null;
+    }
+  }
+
   render()
   {
     return (
       !this.state.isLoginSuccessful ? (
-        <div>
         <LoginForm username={this.state.username} password={this.state.password}
           onUsernameChange={this.onUsernameChanged} onPasswordChange={this.onPasswordChanged}
-          onSubmit={this.onLoginClick} />
-        </div>
+          onSubmit={this.onLoginClick} validate={this.validateFormValues} />
       ) : (
         <Redirect to={this.state.redirect}/>
       )
