@@ -12,7 +12,7 @@
     "build": "SET NODE_ENV=production& npm-run-all eslint stylelint test compile",
     "compile": "rimraf dist/*& webpack --config config/webpack.prod.js",
     "prestart": "babel-node tools/startMessage.js",
-    "start": "SET NODE_ENV=development& npm-run-all --parallel test:watch open:src lint:watch stylelint",
+    "start": "SET NODE_ENV=development& npm-run-all --parallel test:watch open:src eslint:watch stylelint",
     "open:src": "babel-node tools/srcServer.js",
     "stylelint": "stylelint --config config/stylelint.js --color src/stylesheets/*.scss",
     "eslint": "node_modules/.bin/esw --config config/eslint.js src tools",
