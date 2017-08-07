@@ -5,7 +5,6 @@ import { Form, FormGroup, Col, Row, FormControl, ControlLabel, Button } from 're
 const LoginForm = (props) => {
     return (
       <div className="colspan-12 center-block login-form-container">
-        <div className="login-heading">Login</div>
         <Form horizontal bsClass="login-form form">
           <FormGroup controlId="username">
             <Col componentClass={ControlLabel} xs={3}>
