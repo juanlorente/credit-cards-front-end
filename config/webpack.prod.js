@@ -21,7 +21,7 @@ module.exports = {
       {
         test: /\.js$/,
         include: path.resolve('src'),
-        loaders: ['babel-loader']
+        loader: 'babel-loader'
       },
       {
         test: /\.s?css$/,
@@ -34,12 +34,18 @@ module.exports = {
       {
         test: /\.(jpg|gif)$/,
         include: path.resolve('media/images'),
-        loaders: ['file-loader']
+        loader: 'file-loader',
+        options: {
+          name: 'media/images/[name].[ext]'
+        }
       },
       {
         test: /\.mp4$/,
         include: path.resolve('media/videos'),
-        loaders: ['file-loader']
+        loader: 'file-loader',
+        options: {
+          name: 'media/videos/[name].[ext]'
+        }
       }
     ]
   },

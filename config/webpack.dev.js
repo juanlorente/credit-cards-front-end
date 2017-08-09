@@ -24,22 +24,28 @@ export default {
       {
         test: /\.js$/,
         include: path.resolve('src'),
-        loaders: ['babel-loader']
+        loader: 'babel-loader'
       },
       {
         test: /\.s?css$/,
         include: path.resolve('src/stylesheets'),
-        loader: ['style-loader', 'css-loader', 'sass-loader']
+        loaders: ['style-loader', 'css-loader', 'sass-loader']
       },
       {
         test: /\.(jpg|gif)$/,
         include: path.resolve('media/images'),
-        loaders: ['file-loader']
+        loader: 'file-loader',
+        options: {
+          name: 'media/images/[name].[ext]'
+        }
       },
       {
         test: /\.mp4$/,
         include: path.resolve('media/videos'),
-        loaders: ['file-loader']
+        loader: 'file-loader',
+        options: {
+          name: 'media/videos/[name].[ext]'
+        }
       }
     ]
   },
