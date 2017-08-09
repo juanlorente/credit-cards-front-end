@@ -1,11 +1,9 @@
 import React, { Component } from 'react';
-import axios from 'axios';
 import { connect } from 'react-redux';
-import { logout } from './login/actions';
-import apiClient from './api/apiClient';
-import CONSTANTS from './shared/constants';
+import apiClient from '../api/apiClient';
+import CONSTANTS from '../shared/constants';
 
-class Home extends Component {
+class Deals extends Component {
   constructor() {
     super();
     this.state = {
@@ -22,7 +20,7 @@ class Home extends Component {
   render()
   {
     return (
-      <h1>Hello {this.state.username}. This is the home page</h1>
+      <h1>Hello {this.state.username}. This is the deals page</h1>
     );
   }
 }
@@ -33,4 +31,4 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps)(Home);
+export default connect(mapStateToProps)(Deals);

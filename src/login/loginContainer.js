@@ -13,8 +13,7 @@ class LoginContainer extends React.Component {
     this.state = {
       username: '',
       password: '',
-      isLoginSuccessful: false,
-      redirect: { pathname: '/' }
+      isLoginSuccessful: false
     };
 
     this.onLoginClick = this.onLoginClick.bind(this);
@@ -61,13 +60,14 @@ class LoginContainer extends React.Component {
 
   render()
   {
+    const from = this.props.location.state || { pathname: '/' };
     return (
       !this.state.isLoginSuccessful ? (
         <LoginForm username={this.state.username} password={this.state.password}
           onUsernameChange={this.onUsernameChanged} onPasswordChange={this.onPasswordChanged}
           onSubmit={this.onLoginClick} validate={this.validateFormValues} />
       ) : (
-        <Redirect to={this.state.redirect}/>
+        <Redirect to={from}/>
       )
     );
   }

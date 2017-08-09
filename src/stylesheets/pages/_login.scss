@@ -13,6 +13,11 @@
   text-align: center;
   text-decoration: none;
   font-size: 1.25em;
+  &:hover, &:focus {
+    color: white;
+    background-color: $mainBlue;
+    outline: none;
+  }
 }
 
 .login-form-container {
