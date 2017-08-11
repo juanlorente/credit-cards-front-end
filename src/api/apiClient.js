@@ -28,7 +28,7 @@ class ApiClient {
     }).catch((error) => {
       // TODO: identify best way to handle these errors
       console.log(error);
-      // callback(error.response);
+      callback(error.response);
     });
   }
 }

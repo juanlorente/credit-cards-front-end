@@ -1,0 +1,32 @@
+.message-hidden {
+  display: none;
+}
+
+.message-size1 {
+  font-size: .75em;
+}
+
+.message-size2 {
+  font-size: 1em;
+}
+
+.message-size3 {
+  font-size: 1.25em;
+}
+.message-size4 {
+  font-size: 2em;
+}
+
+.message-error {
+  color: $errorRed;
+}
+
+.message-success {
+  color: green;
+}
+
+.page-message {
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 1em;
+}

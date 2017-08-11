@@ -1,37 +1,35 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Form, FormGroup, Col, Row, FormControl, ControlLabel, Button } from 'react-bootstrap';
+import TextInput from '../shared/forms/text-input';
+import Message from '../shared/message';
+import { Form, FormGroup, Col, Button } from 'react-bootstrap';
 
-const LoginForm = (props) => {
-    return (
-      <div className="colspan-12 center-block login-form-container">
-        <Form horizontal bsClass="login-form form">
-          <FormGroup controlId="username">
-            <Col componentClass={ControlLabel} xs={3}>
-              Username
-            </Col>
-            <Col xs={9}>
-              <FormControl type="text" value={props.username} onChange={props.onUsernameChange} bsClass="login-textbox form-control" />
-            </Col>
-          </FormGroup>
-          <FormGroup controlId="password">
-            <Col componentClass={ControlLabel} xs={3}>
-              Password
-            </Col>
-            <Col xs={9}>
-              <FormControl type="password" value={props.password} onChange={props.onPasswordChange} bsClass="login-textbox form-control" />
-            </Col>
-          </FormGroup>
-          <FormGroup>
-            <Col xsOffset={3} xs={9}>
-              <Button type="submit" onClick={props.onSubmit} bsClass="login-submit-button btn">
-                Sign in
-              </Button>
-            </Col>
-          </FormGroup>
-        </Form>
+const LoginForm = ({username, password, usernameValidationState,
+    passwordValidationState, onUsernameChange, onPasswordChange, onSubmit,
+    usernameErrorMessages, passwordErrorMessages, pageErrorMessages, isInvalidCredentials}) => {
+
+  return (
+    <div className="colspan-12 center-block login-form-container">
+      <div>
+        <Message isPageMessage size={3} messages={pageErrorMessages} state="error" isVisible={isInvalidCredentials} />
       </div>
-    );
+      <Form horizontal bsClass="login-form form">
+        <TextInput controlId="username" validationState={usernameValidationState} labelCol={3}
+          inputCol={9} onChange={onUsernameChange} errorMessages={usernameErrorMessages}
+          inputValue={username} labelValue="Username" inputClass="login-textbox" controlType="text" />
+        <TextInput controlId="password" validationState={passwordValidationState} labelCol={3}
+          inputCol={9} onChange={onPasswordChange} errorMessages={passwordErrorMessages}
+          inputValue={password} labelValue="Password" inputClass="login-textbox" controlType="password" />
+        <FormGroup>
+          <Col xsOffset={3} xs={9}>
+            <Button type="submit" onClick={onSubmit} bsClass="login-submit-button btn">
+              Sign in
+            </Button>
+          </Col>
+        </FormGroup>
+      </Form>
+    </div>
+  );
 };
 
 LoginForm.propTypes = {
@@ -39,8 +37,13 @@ LoginForm.propTypes = {
   password: PropTypes.string.isRequired,
   onUsernameChange: PropTypes.func.isRequired,
   onPasswordChange: PropTypes.func.isRequired,
-  onSubmit: PropTypes.func.isRequired,
-  validate: PropTypes.func.isRequired
+  usernameValidationState: PropTypes.string,
+  passwordValidationState: PropTypes.string,
+  usernameErrorMessages: PropTypes.arrayOf(PropTypes.string).isRequired,
+  passwordErrorMessages: PropTypes.arrayOf(PropTypes.string).isRequired,
+  pageErrorMessages: PropTypes.arrayOf(PropTypes.string).isRequired,
+  isInvalidCredentials: PropTypes.bool.isRequired,
+  onSubmit: PropTypes.func.isRequired
 };
 
 export default LoginForm;
