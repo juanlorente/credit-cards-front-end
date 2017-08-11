@@ -1,6 +1,5 @@
 import React from 'react';
 import { Route, Switch, Redirect } from 'react-router-dom';
-import NotFound from './shared/notFound';
 import LoginContainer from './login/loginContainer';
 import Shop from './shop/shop';
 import Merchants from './merchants/merchants';
@@ -20,7 +19,7 @@ export default (store) => {
         <PrivateRoute path="/merchants" component={Merchants} />
         <PrivateRoute path="/shop" component={Shop} />
         <Redirect from="/" to="/shop" />
-        <Route path="*" component={NotFound} status={404} />
+        <Redirect to="/" />
       </Switch>
     </main>
   );

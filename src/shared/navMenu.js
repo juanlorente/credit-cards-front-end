@@ -1,39 +1,17 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { withRouter } from 'react-router';
 import { Navbar, Nav, NavItem } from 'react-bootstrap';
+import { LinkContainer } from 'react-router-bootstrap';
 import PubSub from 'pubsub-js';
 import CONSTANTS from './constants';
 
 class NavMenu extends React.Component {
   constructor(props) {
     super(props);
-
-    this.state = {
-      activeKey: CONSTANTS.NAV_BAR.PATH_TO_KEY_MAP.get(this.props.location.pathname.split('/')[1])
-    };
-
-    this.onSelect = this.onSelect.bind(this);
   }
 
-  onSelect(eventKey) {
-    if(this.state.activeKey !== eventKey) {
-      this.setState({ activeKey: eventKey });
-    }
-
-    if(eventKey !== CONSTANTS.NAV_BAR.KEYS.LOGOUT) {
-      this.props.history.push(CONSTANTS.NAV_BAR.KEY_TO_PATH_MAP.get(eventKey));
-    }
-    else {
-      PubSub.publish(CONSTANTS.PUB_SUB.LOGOUT);
-    }
-  }
-
-  componentWillReceiveProps(nextProps) {
-    const newKey = CONSTANTS.NAV_BAR.PATH_TO_KEY_MAP.get(nextProps.location.pathname.split('/')[1]);
-    if(newKey !== this.state.activeKey) {
-      this.setState({ activeKey: newKey });
-    }
+  logout() {
+    PubSub.publish(CONSTANTS.PUB_SUB.LOGOUT);
   }
 
   render()
@@ -45,13 +23,23 @@ class NavMenu extends React.Component {
             <Navbar.Toggle />
           </Navbar.Header>
           <Navbar.Collapse>
-            <Nav justified activeKey={this.state.activeKey} onSelect={this.onSelect}>
-              <NavItem eventKey={CONSTANTS.NAV_BAR.KEYS.SHOP}>Shop</NavItem>
-              <NavItem eventKey={CONSTANTS.NAV_BAR.KEYS.DEALS}>Deals</NavItem>
-              <NavItem eventKey={CONSTANTS.NAV_BAR.KEYS.CREDIT_CARDS}>Credit Cards</NavItem>
-              <NavItem eventKey={CONSTANTS.NAV_BAR.KEYS.MERCHANTS}>Merchants</NavItem>
-              <NavItem eventKey={CONSTANTS.NAV_BAR.KEYS.PROFILE}>Profile</NavItem>
-              <NavItem eventKey={CONSTANTS.NAV_BAR.KEYS.LOGOUT}>Logout</NavItem>
+            <Nav justified>
+              <LinkContainer to="/shop" activeClassName="active">
+                <NavItem eventKey={CONSTANTS.NAV_BAR.KEYS.SHOP}>Shop</NavItem>
+              </LinkContainer>
+              <LinkContainer to="/deals" activeClassName="active">
+                <NavItem eventKey={CONSTANTS.NAV_BAR.KEYS.DEALS}>Deals</NavItem>
+              </LinkContainer>
+              <LinkContainer to="/credit-cards" activeClassName="active">
+                <NavItem eventKey={CONSTANTS.NAV_BAR.KEYS.CREDIT_CARDS}>Credit Cards</NavItem>
+              </LinkContainer>
+              <LinkContainer to="/merchants" activeClassName="active">
+                <NavItem eventKey={CONSTANTS.NAV_BAR.KEYS.MERCHANTS}>Merchants</NavItem>
+              </LinkContainer>
+              <LinkContainer to="/profile" activeClassName="active">
+                <NavItem eventKey={CONSTANTS.NAV_BAR.KEYS.PROFILE}>Profile</NavItem>
+              </LinkContainer>
+              <NavItem eventKey={CONSTANTS.NAV_BAR.KEYS.LOGOUT} onClick={this.logout}>Logout</NavItem>
             </Nav>
           </Navbar.Collapse>
         </Navbar>
@@ -68,4 +56,4 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps)(withRouter(NavMenu));
+export default connect(mapStateToProps)(NavMenu);
