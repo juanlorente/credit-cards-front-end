@@ -107,7 +107,9 @@ const mapDispatchToProps = dispatch => {
 
 LoginContainer.propTypes = {
   location: PropTypes.shape({
-    state: PropTypes.object,
+    state: PropTypes.shape({
+      pathname: PropTypes.string,
+    }),
   }),
   onLoginSuccess: PropTypes.func.isRequired
 };

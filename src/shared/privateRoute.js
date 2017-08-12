@@ -1,12 +1,13 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Route, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { login } from '../login/actions';
 import CONSTANTS from './constants';
 
 class PrivateRoute extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       loadedPersistedSession: false
     };
@@ -52,6 +53,16 @@ const mapDispatchToProps = dispatch => {
       dispatch(login(sessionId, user));
     }
   };
+};
+
+PrivateRoute.propTypes = {
+  sessionId: PropTypes.string,
+  loadPersistedSession: PropTypes.func.isRequired,
+  component: PropTypes.oneOf([PropTypes.element, PropTypes.func]).isRequired,
+  routeArgs: PropTypes.object,
+  location: PropTypes.shape({
+    pathname: PropTypes.string,
+  }),
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(PrivateRoute);

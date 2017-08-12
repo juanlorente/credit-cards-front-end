@@ -26,9 +26,12 @@ class ApiClient {
     apiFunc().then((response) => {
       callback(response);
     }).catch((error) => {
-      // TODO: identify best way to handle these errors
-      console.log(error);
-      callback(error.response);
+      // only pass error response back to component when invalid credentials
+      // entered on login page
+      if(error.response.status === CONSTANTS.HTTP_STATUS_CODES.INVALID_AUTHENTICATION
+        && method === CONSTANTS.HTTP_METHODS.POST && path.indexOf('authenticate') !== -1) {
+          callback(error.response);
+      }
     });
   }
 }

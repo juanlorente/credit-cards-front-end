@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Navbar, Nav, NavItem } from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';
@@ -11,6 +12,7 @@ class NavMenu extends React.Component {
   }
 
   logout() {
+    // TODO: add api call to expire cookie
     PubSub.publish(CONSTANTS.PUB_SUB.LOGOUT);
   }
 
@@ -54,6 +56,10 @@ const mapStateToProps = (state) => {
   return {
     isLoggedIn: state.session.sessionId
   };
+};
+
+NavMenu.propTypes = {
+  isLoggedIn: PropTypes.string
 };
 
 export default connect(mapStateToProps)(NavMenu);

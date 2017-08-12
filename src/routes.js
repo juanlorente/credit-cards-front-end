@@ -7,8 +7,9 @@ import Profile from './profile/profile';
 import CreditCards from './creditCards/creditCards';
 import Deals from './deals/deals';
 import PrivateRoute from './shared/privateRoute';
+import ErrorPage from './error/error';
 
-export default (store) => {
+const Routes = (store) => {
   return(
     <main className="row">
       <Switch>
@@ -18,9 +19,12 @@ export default (store) => {
         <PrivateRoute path="/deals" component={Deals} />
         <PrivateRoute path="/merchants" component={Merchants} />
         <PrivateRoute path="/shop" component={Shop} />
-        <Redirect from="/" to="/shop" />
+        <Route path="/error" component={ErrorPage} />
+        <Redirect from="/" exact to="/shop" />
         <Redirect to="/" />
       </Switch>
     </main>
   );
 };
+
+export default Routes;

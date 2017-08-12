@@ -27,8 +27,12 @@ axios.interceptors.request.use((config) => {
 axios.interceptors.response.use((response) => {
   return response;
 }, (error) => {
-  if(error.response.status === 401) {
+  if(error.response.status === CONSTANTS.HTTP_STATUS_CODES.INVALID_AUTHENTICATION) {
     PubSub.publish(CONSTANTS.PUB_SUB.LOGOUT);
+  }
+  // TODO: handle unauthorized requests more gracefully
+  else {
+    history.push('/error');
   }
   return Promise.reject(error);
 });
