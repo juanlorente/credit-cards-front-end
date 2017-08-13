@@ -58,7 +58,7 @@ const mapDispatchToProps = dispatch => {
 PrivateRoute.propTypes = {
   sessionId: PropTypes.string,
   loadPersistedSession: PropTypes.func.isRequired,
-  component: PropTypes.oneOf([PropTypes.element, PropTypes.func]).isRequired,
+  component: PropTypes.oneOfType([PropTypes.element, PropTypes.func]).isRequired,
   routeArgs: PropTypes.object,
   location: PropTypes.shape({
     pathname: PropTypes.string,
