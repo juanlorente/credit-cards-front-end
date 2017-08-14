@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import { Router, Route } from 'react-router-dom';
 import createHistory from 'history/createBrowserHistory';
 import { Provider } from 'react-redux';
-import { createStore, combineReducers } from 'redux';
+import { createStore, combineReducers, applyMiddleware } from 'redux';
 import PubSub from 'pubsub-js';
 import routes from './routes';
 import './stylesheets/main.scss';
@@ -17,7 +17,13 @@ import { Grid } from 'react-bootstrap';
 
 const history = createHistory();
 const reducers = combineReducers({ session });
-const store = createStore(reducers);
+const middleware = process.env.NODE_ENV !== 'production' ?
+  [require('redux-immutable-state-invariant').default()] :
+  [];
+const store = createStore(
+  reducers,
+  applyMiddleware(...middleware)
+);
 
 axios.interceptors.request.use((config) => {
   config.headers = { [CONSTANTS.AUTHENTICATION_HEADER] : store.getState().session.sessionId };
