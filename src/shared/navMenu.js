@@ -5,6 +5,7 @@ import { Navbar, Nav, NavItem } from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';
 import PubSub from 'pubsub-js';
 import CONSTANTS from './constants';
+import apiClient from '../api/apiClient';
 
 class NavMenu extends React.Component {
   constructor(props) {
@@ -12,7 +13,7 @@ class NavMenu extends React.Component {
   }
 
   logout() {
-    // TODO: add api call to expire cookie
+    apiClient.callCreditCardsApi(CONSTANTS.HTTP_METHODS.POST, '/logout', (response) => { });
     PubSub.publish(CONSTANTS.PUB_SUB.LOGOUT);
   }
 
