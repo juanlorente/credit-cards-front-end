@@ -1,7 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-import { login } from './actions';
 import { Link, Redirect } from 'react-router-dom';
 import LoginForm from './loginForm';
 import apiClient from '../api/apiClient';
@@ -15,6 +13,7 @@ class LoginContainer extends React.Component {
     this.state = {
       username: '',
       password: '',
+      rememberMe: false,
       usernameValidationState: null,
       passwordValidationState: null,
       usernameErrorMessages: [],
@@ -26,16 +25,21 @@ class LoginContainer extends React.Component {
     };
 
     this.onLoginClick = this.onLoginClick.bind(this);
-    this.onUsernameChanged = this.onUsernameChanged.bind(this);
-    this.onPasswordChanged = this.onPasswordChanged.bind(this);
+    this.onUsernameChange = this.onUsernameChange.bind(this);
+    this.onPasswordChange = this.onPasswordChange.bind(this);
+    this.onRememberMeChange = this.onRememberMeChange.bind(this);
   }
 
-  onUsernameChanged(event) {
+  onUsernameChange(event) {
     this.setState({ username: event.target.value, usernameValidationState: null });
   }
 
-  onPasswordChanged(event) {
+  onPasswordChange(event) {
     this.setState({ password: event.target.value, passwordValidationState: null });
+  }
+
+  onRememberMeChange(event) {
+    this.setState({ rememberMe: event.target.checked });
   }
 
   onLoginClick(event) {
@@ -44,17 +48,15 @@ class LoginContainer extends React.Component {
       this.setState({isInvalidCredentials: false, pageErrorMessages: []});
       apiClient.callCreditCardsApi(CONSTANTS.HTTP_METHODS.POST, '/authenticate', (response) => {
         if(response.status === CONSTANTS.HTTP_STATUS_CODES.OK) {
-          this.props.onLoginSuccess(response.data.token, {username: response.data.user.userName});
-          sessionStorage.setItem(CONSTANTS.LOCAL_STORAGE.SESSION_KEY, JSON.stringify({
-            id: response.data.token,
-            user: { username: response.data.user.userName }
-          }));
+          if(this.state.rememberMe) {
+            localStorage.setItem(CONSTANTS.LOCAL_STORAGE.REMEMBER_ME_KEY, 'true');
+          }
           this.setState({ isLoginSuccessful: true });
         }
         else if(response.status === CONSTANTS.HTTP_STATUS_CODES.INVALID_AUTHENTICATION) {
           this.setState({isInvalidCredentials: true, pageErrorMessages: ['Invalid Credentials']});
         }
-      }, { userName: this.state.username, password: this.state.password });
+      }, { userName: this.state.username, password: this.state.password, rememberMe: this.state.rememberMe });
     }
   }
 
@@ -84,12 +86,11 @@ class LoginContainer extends React.Component {
   {
     return (
       !this.state.isLoginSuccessful ? (
-        <LoginForm username={this.state.username} password={this.state.password}
-          onUsernameChange={this.onUsernameChanged} onPasswordChange={this.onPasswordChanged}
+        <LoginForm onUsernameChange={this.onUsernameChange} onPasswordChange={this.onPasswordChange}
           onSubmit={this.onLoginClick} usernameValidationState={this.state.usernameValidationState}
           passwordValidationState={this.state.passwordValidationState} usernameErrorMessages={this.state.usernameErrorMessages}
           passwordErrorMessages={this.state.passwordErrorMessages} isInvalidCredentials={this.state.isInvalidCredentials}
-          pageErrorMessages={this.state.pageErrorMessages} />
+          pageErrorMessages={this.state.pageErrorMessages} onRememberMeChange={this.onRememberMeChange} />
       ) : (
         <Redirect to={this.state.from}/>
       )
@@ -97,21 +98,12 @@ class LoginContainer extends React.Component {
   }
 }
 
-const mapDispatchToProps = dispatch => {
-  return {
-    onLoginSuccess: (sessionId, user) => {
-      dispatch(login(sessionId, user));
-    }
-  };
-};
-
 LoginContainer.propTypes = {
   location: PropTypes.shape({
     state: PropTypes.shape({
       pathname: PropTypes.string,
     }),
-  }),
-  onLoginSuccess: PropTypes.func.isRequired
+  })
 };
 
-export default connect(null, mapDispatchToProps)(LoginContainer);
+export default LoginContainer;

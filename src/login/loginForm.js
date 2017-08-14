@@ -2,11 +2,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import TextInput from '../shared/forms/text-input';
 import Message from '../shared/message';
-import { Form, FormGroup, Col, Button } from 'react-bootstrap';
+import { Form, FormGroup, Col, Button, Checkbox } from 'react-bootstrap';
 
-const LoginForm = ({username, password, usernameValidationState,
-    passwordValidationState, onUsernameChange, onPasswordChange, onSubmit,
-    usernameErrorMessages, passwordErrorMessages, pageErrorMessages, isInvalidCredentials}) => {
+const LoginForm = ({usernameValidationState, passwordValidationState, onUsernameChange,
+    onPasswordChange, onRememberMeChange, onSubmit, usernameErrorMessages,
+    passwordErrorMessages, pageErrorMessages, isInvalidCredentials}) => {
 
   return (
     <div className="colspan-12 center-block login-form-container">
@@ -16,10 +16,17 @@ const LoginForm = ({username, password, usernameValidationState,
       <Form horizontal bsClass="login-form form">
         <TextInput controlId="username" validationState={usernameValidationState} labelCol={3}
           inputCol={9} onChange={onUsernameChange} errorMessages={usernameErrorMessages}
-          inputValue={username} labelValue="Username" inputClass="login-textbox" controlType="text" />
+          labelValue="Username" inputClass="login-textbox" controlType="text" />
         <TextInput controlId="password" validationState={passwordValidationState} labelCol={3}
           inputCol={9} onChange={onPasswordChange} errorMessages={passwordErrorMessages}
-          inputValue={password} labelValue="Password" inputClass="login-textbox" controlType="password" />
+          labelValue="Password" inputClass="login-textbox" controlType="password" />
+        <FormGroup>
+          <Col xsOffset={3} xs={9}>
+            <Checkbox onChange={onRememberMeChange} bsClass="login-remember-me-checkbox checkbox">
+              Remember Me
+            </Checkbox>
+          </Col>
+        </FormGroup>
         <FormGroup>
           <Col xsOffset={3} xs={9}>
             <Button type="submit" onClick={onSubmit} bsClass="login-submit-button btn">
@@ -33,10 +40,9 @@ const LoginForm = ({username, password, usernameValidationState,
 };
 
 LoginForm.propTypes = {
-  username: PropTypes.string.isRequired,
-  password: PropTypes.string.isRequired,
   onUsernameChange: PropTypes.func.isRequired,
   onPasswordChange: PropTypes.func.isRequired,
+  onRememberMeChange: PropTypes.func.isRequired,
   usernameValidationState: PropTypes.string,
   passwordValidationState: PropTypes.string,
   usernameErrorMessages: PropTypes.arrayOf(PropTypes.string).isRequired,

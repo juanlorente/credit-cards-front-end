@@ -12,7 +12,7 @@ import Title from './shared/title';
 import NavMenu from './shared/navMenu';
 import axios from 'axios';
 import CONSTANTS from './shared/constants';
-import { logout } from './login/actions';
+import { login, logout } from './login/actions';
 import { Grid } from 'react-bootstrap';
 
 const history = createHistory();
@@ -31,6 +31,15 @@ axios.interceptors.request.use((config) => {
 });
 
 axios.interceptors.response.use((response) => {
+  // save session info in store if new session created with request
+  if(response.data.sessionToken && response.data.sessionUser) {
+    sessionStorage.setItem(CONSTANTS.LOCAL_STORAGE.SESSION_KEY, JSON.stringify({
+      id: response.data.sessionToken,
+      user: { username: response.data.sessionUser.userName }
+    }));
+    store.dispatch(login(response.data.sessionToken, {username: response.data.sessionUser.userName}));
+  }
+
   return response;
 }, (error) => {
   if(error.response.status === CONSTANTS.HTTP_STATUS_CODES.INVALID_AUTHENTICATION) {

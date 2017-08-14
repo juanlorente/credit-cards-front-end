@@ -9,7 +9,8 @@ class PrivateRoute extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      loadedPersistedSession: false
+      loadedPersistedSession: false,
+      hasRememberMeToken: false
     };
   }
 
@@ -20,6 +21,11 @@ class PrivateRoute extends React.Component {
         this.props.loadPersistedSession(persistedSession.id, persistedSession.user);
         this.setState({ loadedPersistedSession : true });
       }
+      else {
+        if(localStorage.getItem(CONSTANTS.LOCAL_STORAGE.REMEMBER_ME_KEY) === 'true') {
+          this.setState({ hasRememberMeToken: true });
+        }
+      }
     }
   }
 
@@ -29,7 +35,7 @@ class PrivateRoute extends React.Component {
 
   render() {
     return (
-      (this.props.sessionId || this.state.loadedPersistedSession) ? (
+      (this.props.sessionId || this.state.loadedPersistedSession || this.state.hasRememberMeToken) ? (
         <Route {...this.props.routeArgs} component={this.props.component} />
       ) : (
         <Redirect to={{

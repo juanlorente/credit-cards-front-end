@@ -25,7 +25,7 @@ TextInput.propTypes = {
   controlId: PropTypes.string.isRequired,
   validationState: PropTypes.string,
   onChange: PropTypes.func.isRequired,
-  inputValue: PropTypes.string.isRequired,
+  inputValue: PropTypes.string,
   labelValue: PropTypes.string.isRequired,
   controlType: PropTypes.string.isRequired,
   labelCol: PropTypes.number.isRequired,

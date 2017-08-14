@@ -1,4 +1,13 @@
+.login-form-container {
+  max-width: 21em;
+  padding: 0 .5em;
+}
+
 .login-textbox {
+  margin-left: 1em;
+}
+
+.login-remember-me-checkbox {
   margin-left: 1em;
 }
 
@@ -17,9 +26,4 @@
     background-color: $mainBlue;
     outline: none;
   }
-}
-
-.login-form-container {
-  max-width: 21em;
-  padding: 0 .5em;
 }
