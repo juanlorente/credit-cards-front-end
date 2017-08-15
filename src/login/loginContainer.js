@@ -56,7 +56,7 @@ class LoginContainer extends React.Component {
         else if(response.status === CONSTANTS.HTTP_STATUS_CODES.INVALID_AUTHENTICATION) {
           this.setState({isInvalidCredentials: true, pageErrorMessages: ['Invalid Credentials']});
         }
-      }, { userName: this.state.username, password: this.state.password, rememberMe: this.state.rememberMe });
+      }, { username: this.state.username, password: this.state.password, rememberMe: this.state.rememberMe });
     }
   }
 
