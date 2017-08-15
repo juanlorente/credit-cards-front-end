@@ -3,16 +3,12 @@
   padding: 0 .5em;
 }
 
-.login-textbox {
-  margin-left: 1em;
-}
-
-.login-remember-me-checkbox {
-  margin-left: 1em;
+.form-horizontal .control-label {
+  padding-top: 7px;
 }
 
 .login-submit-button {
-  margin: 1em;
+  margin: 1em 0;
   background-color: $mainBlue;
   border: none;
   font-weight: bold;

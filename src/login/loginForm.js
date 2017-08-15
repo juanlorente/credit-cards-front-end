@@ -13,22 +13,22 @@ const LoginForm = ({usernameValidationState, passwordValidationState, onUsername
       <div>
         <Message isPageMessage size={3} messages={pageErrorMessages} state="error" isVisible={isInvalidCredentials} />
       </div>
-      <Form horizontal bsClass="login-form form">
-        <TextInput controlId="username" validationState={usernameValidationState} labelCol={3}
-          inputCol={9} onChange={onUsernameChange} errorMessages={usernameErrorMessages}
-          labelValue="Username" inputClass="login-textbox" controlType="text" />
-        <TextInput controlId="password" validationState={passwordValidationState} labelCol={3}
-          inputCol={9} onChange={onPasswordChange} errorMessages={passwordErrorMessages}
-          labelValue="Password" inputClass="login-textbox" controlType="password" />
+      <Form horizontal>
+        <TextInput controlId="username" validationState={usernameValidationState} labelCol={4}
+          inputCol={8} onChange={onUsernameChange} errorMessages={usernameErrorMessages}
+          labelValue="Username" controlType="text" />
+        <TextInput controlId="password" validationState={passwordValidationState} labelCol={4}
+          inputCol={8} onChange={onPasswordChange} errorMessages={passwordErrorMessages}
+          labelValue="Password" controlType="password" />
         <FormGroup>
-          <Col xsOffset={3} xs={9}>
+          <Col xsOffset={4} xs={8}>
             <Checkbox onChange={onRememberMeChange} bsClass="login-remember-me-checkbox checkbox">
               Remember Me
             </Checkbox>
           </Col>
         </FormGroup>
         <FormGroup>
-          <Col xsOffset={3} xs={9}>
+          <Col xsOffset={4} xs={8}>
             <Button type="submit" onClick={onSubmit} bsClass="login-submit-button btn">
               Sign in
             </Button>
