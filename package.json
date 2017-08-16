@@ -9,20 +9,21 @@
     "url": "https://github.com/bschneier/credit-cards-front-end"
   },
   "scripts": {
-    "build": "SET NODE_ENV=production& npm-run-all eslint stylelint test compile",
+    "build": "SET NODE_ENV=production& npm-run-all check-security eslint stylelint test compile",
     "compile": "rimraf dist/*& webpack --config config/webpack.prod.js",
     "prestart": "babel-node tools/startMessage.js",
-    "start": "SET NODE_ENV=development& npm-run-all --parallel test:watch open:src eslint:watch stylelint",
+    "start": "SET NODE_ENV=development& npm-run-all --parallel check-security test:watch open:src eslint:watch stylelint",
     "open:src": "babel-node tools/srcServer.js",
     "stylelint": "stylelint --config config/stylelint.js --color src/stylesheets/*.scss",
     "eslint": "node_modules/.bin/esw --config config/eslint.js src tools",
     "eslint:watch": "npm run eslint -- --watch",
     "test": "mocha --reporter progress tools/testSetup.js \"src/**/*.test.js\"",
-    "test:watch": "npm run test -- --watch"
+    "test:watch": "npm run test -- --watch",
+    "check-security": "nsp check"
   },
   "dependencies": {
     "axios": "^0.16.2",
-    "babel-polyfill": "^6.23.0",
+    "babel-polyfill": "^6.26.0",
     "prop-types": "^15.5.10",
     "pubsub-js": "^1.5.7",
     "react": "^15.6.1",
@@ -31,19 +32,18 @@
     "react-redux": "^5.0.6",
     "react-router-bootstrap": "^0.24.2",
     "react-router-dom": "^4.1.2",
-    "redux": "^3.7.2",
-    "toastr": "^2.1.2"
+    "redux": "^3.7.2"
   },
   "devDependencies": {
-    "babel-cli": "^6.24.1",
-    "babel-core": "^6.25.0",
+    "babel-cli": "^6.26.0",
+    "babel-core": "^6.26.0",
     "babel-loader": "^7.1.1",
     "babel-plugin-transform-react-constant-elements": "^6.23.0",
     "babel-preset-es2015": "^6.24.1",
     "babel-preset-es2016": "^6.24.1",
     "babel-preset-react": "^6.24.1",
     "babel-preset-react-hmre": "^1.1.1",
-    "babel-register": "^6.24.1",
+    "babel-register": "^6.26.0",
     "colors": "^1.1.2",
     "connect-history-api-fallback": "^1.3.0",
     "css-loader": "^0.28.4",
@@ -64,6 +64,7 @@
     "nock": "8.0.0",
     "node-sass": "^4.5.3",
     "npm-run-all": "^4.0.2",
+    "nsp": "^2.7.0",
     "open": "^0.0.5",
     "react-addons-test-utils": "15.0.2",
     "redux-immutable-state-invariant": "^2.0.0",
@@ -76,7 +77,7 @@
     "stylelint-config-standard": "^17.0.0",
     "stylelint-scss": "^2.0.1",
     "url-loader": "^0.5.9",
-    "webpack": "^3.5.4",
+    "webpack": "^3.5.5",
     "webpack-dev-middleware": "^1.12.0",
     "webpack-hot-middleware": "^2.18.2"
   }
