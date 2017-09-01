@@ -14,7 +14,6 @@ import axios from 'axios';
 import CONSTANTS from './shared/constants';
 import { login, logout } from './login/actions';
 import { Grid } from 'react-bootstrap';
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
 const history = createHistory();
 const reducers = combineReducers({ session });
@@ -63,13 +62,11 @@ PubSub.subscribe(CONSTANTS.PUB_SUB.LOGOUT, () => {
 ReactDOM.render(
   <Provider store={store}>
     <Router history={history}>
-      <MuiThemeProvider>
-        <Grid>
-          <Title />
-            <Route path="/" component={NavMenu} />
-            {routes()}
-        </Grid>
-      </MuiThemeProvider>
+      <Grid>
+        <Title />
+          <Route path="/" component={NavMenu} />
+          {routes()}
+      </Grid>
     </Router>
   </Provider>,
   document.getElementById('app')
