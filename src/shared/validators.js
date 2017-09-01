@@ -1,4 +1,25 @@
+import Utils from '../shared/utils';
+
 export default class Validators {
+  static validateForm(formFields) {
+    let isValid = true;
+    for (let field in formFields) {
+      if(formFields[field].validators) {
+        formFields[field] = this.validateField(formFields[field], field);
+        isValid = isValid && formFields[field].validationState === null;
+      }
+    }
+
+    return { isValid, formFields };
+  }
+
+  static validateField(field, fieldName) {
+    field.errorMessages = Validators.runValidators(field.validators,
+      Utils.capitalizeFirstChar(fieldName), field.value);
+    field.validationState = field.errorMessages.length > 0 ? 'error' : null;
+    return field;
+  }
+
   static runValidators(validators, fieldName, fieldValue) {
     let messages = [];
     validators.forEach((validator) => {
@@ -19,4 +40,6 @@ export default class Validators {
       return null;
     }
   }
+
+
 }
