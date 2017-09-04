@@ -11,7 +11,8 @@ const TextInput = ({controlId, field, labelColProps, controlType = "text",
         {labelValue}
       </Col>
       <Col {...inputColProps}>
-          <FormControl type={controlType} value={field.value} onChange={onChange} />
+          <FormControl bsClass="credit-cards-text-input form-control" type={controlType}
+            value={field.value} onChange={onChange} />
           <Message messages={field.errorMessages} isVisible={field.validationState === 'error'} state="error" />
       </Col>
     </FormGroup>

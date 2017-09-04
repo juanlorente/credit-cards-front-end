@@ -5,3 +5,20 @@
   text-align: center;
   padding: .25em;
 }
+
+.credit-cards-page-header {
+  color: $mainBlue;
+  margin-top: 0;
+  padding-left: 1em;
+  h1 {
+    margin: 0;
+  }
+}
+
+.credit-cards-main-content {
+  margin: 0;
+}
+
+.credit-cards-text-input {
+  max-width: 17em;
+}

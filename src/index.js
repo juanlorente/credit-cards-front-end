@@ -64,8 +64,8 @@ ReactDOM.render(
     <Router history={history}>
       <Grid>
         <Title />
-          <Route path="/" component={NavMenu} />
-          {routes()}
+        <Route path="/" component={NavMenu} />
+        {routes()}
       </Grid>
     </Router>
   </Provider>,

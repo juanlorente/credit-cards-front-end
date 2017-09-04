@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link, Redirect } from 'react-router-dom';
+import { Form } from 'react-bootstrap';
 import apiClient from '../api/apiClient';
 import CONSTANTS from '../shared/constants';
 import Validators from '../shared/validators';
@@ -8,7 +9,6 @@ import TextInput from '../shared/forms/textInput';
 import CheckBox from '../shared/forms/checkBox';
 import Button from '../shared/forms/button';
 import Message from '../shared/message';
-import { Form, FormGroup, Col } from 'react-bootstrap';
 
 class LoginContainer extends React.Component {
   constructor(props) {
@@ -20,13 +20,13 @@ class LoginContainer extends React.Component {
           value: '',
           validationState: null,
           errorMessages: [],
-          validators: [Validators.isRequiredValidator]
+          validators: [Validators.isRequired]
         },
         password: {
           value: '',
           validationState: null,
           errorMessages: [],
-          validators: [Validators.isRequiredValidator]
+          validators: [Validators.isRequired]
         },
         rememberMe: {
           value: false
@@ -86,10 +86,8 @@ class LoginContainer extends React.Component {
     return (
       !this.state.isLoginSuccessful ? (
         <div className="colspan-12 center-block login-form-container">
-          <div>
-            <Message isPageMessage size={3} messages={this.state.pageErrorMessages} state="error"
-              isVisible={this.state.isInvalidCredentials} />
-          </div>
+          <Message isPageMessage size={3} messages={this.state.pageErrorMessages} state="error"
+            isVisible={this.state.isInvalidCredentials} />
           <Form horizontal>
             <TextInput controlId="username" field={this.state.formFields.username} labelColProps={{xs: 4}}
               inputColProps={{xs: 8}} onChange={this.onTextFieldChange} labelValue="Username" />

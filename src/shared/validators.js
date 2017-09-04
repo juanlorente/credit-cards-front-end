@@ -32,7 +32,7 @@ export default class Validators {
     return messages;
   }
 
-  static isRequiredValidator(fieldName, fieldValue) {
+  static isRequired(fieldName, fieldValue) {
     if(fieldValue === null || fieldValue === '') {
       return `${fieldName} is required`;
     }
@@ -41,5 +41,7 @@ export default class Validators {
     }
   }
 
-
+  static isEmail(fieldName, fieldValue) {
+    return /\S+@\S+\.\S+/.test(fieldValue) ? null : `${fieldName} must be a valid email address`;
+  }
 }
