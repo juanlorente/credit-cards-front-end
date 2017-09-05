@@ -6,7 +6,7 @@ const Button = ({columnProps, textValue, buttonType, buttonProps, onClick}) => {
   return (
     <FormGroup>
     <Col {...columnProps}>
-      <RbButton {...buttonProps} onClick={onClick} bsClass="login-submit-button btn">
+      <RbButton {...buttonProps} onClick={onClick} type={buttonType} bsClass="login-submit-button btn">
         {textValue}
       </RbButton>
     </Col>

@@ -88,7 +88,7 @@ class LoginContainer extends React.Component {
         <div className="colspan-12 center-block login-form-container">
           <Message isPageMessage size={3} messages={this.state.pageErrorMessages} state="error"
             isVisible={this.state.isInvalidCredentials} />
-          <Form horizontal>
+          <Form horizontal onSubmit={this.onSubmit}>
             <TextInput controlId="username" field={this.state.formFields.username} labelColProps={{xs: 4}}
               inputColProps={{xs: 8}} onChange={this.onTextFieldChange} labelValue="Username" />
             <TextInput controlId="password" field={this.state.formFields.password} labelColProps={{xs: 4}}
@@ -96,8 +96,7 @@ class LoginContainer extends React.Component {
               controlType="password" />
             <CheckBox controlId="remember-me" columnProps={{xsOffset: 4, xs: 8}} onChange={this.onRememberMeChange}
               labelValue="Remember Me" />
-            <Button buttonType="submit" onClick={this.onSubmit}
-                  columnProps={{xsOffset:4, xs:8}} textValue="Sign In" />
+            <Button buttonType="submit" columnProps={{xsOffset:4, xs:8}} textValue="Sign In" />
           </Form>
         </div>
       ) : (

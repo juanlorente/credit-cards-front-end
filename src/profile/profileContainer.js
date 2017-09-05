@@ -103,7 +103,7 @@ class ProfileContainer extends Component {
             </Col>
           </Row>
         </Col>
-        <Form horizontal>
+        <Form horizontal onSubmit={this.onSave}>
           <TextInput controlId="username" field={this.state.formFields.username} labelColProps={{xs: xsLabelCols, lg: lgLabelCols}}
             inputColProps={{xs: xsFieldCols, lg: lgFieldCols}} onChange={this.onTextFieldChange} labelValue="Username" />
           <TextInput controlId="firstName" field={this.state.formFields.firstName} labelColProps={{xs: xsLabelCols, lg: lgLabelCols}}
@@ -112,7 +112,7 @@ class ProfileContainer extends Component {
             inputColProps={{xs: xsFieldCols, lg: lgFieldCols}} onChange={this.onTextFieldChange} labelValue="Last Name" />
           <TextInput controlId="email" field={this.state.formFields.email} labelColProps={{xs: xsLabelCols, lg: lgLabelCols}}
             inputColProps={{xs: xsFieldCols, lg: lgFieldCols}} onChange={this.onTextFieldChange} labelValue="Email" />
-          <Button buttonType="submit" onClick={this.onSave}
+          <Button buttonType="submit"
                 columnProps={{xsOffset: xsLabelCols, xs: xsFieldCols, lgOffset: lgLabelCols, lg: lgFieldCols}} textValue="Save" />
         </Form>
       </div>
