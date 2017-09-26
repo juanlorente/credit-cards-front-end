@@ -7,12 +7,12 @@ const CheckBox = ({controlId, columnProps, isChecked, labelValue, checkboxProps,
                     validationState, onChange, errorMessages}) => {
   return (
     <FormGroup controlId={controlId} validationState={validationState}>
-    <Col {...columnProps}>
-      <Checkbox onChange={onChange} {...checkboxProps}>
-        {labelValue}
-      </Checkbox>
-      <Message messages={errorMessages} isVisible={validationState === 'error'} state="error" />
-    </Col>
+      <Col {...columnProps}>
+        <Checkbox onChange={onChange} checked={isChecked} {...checkboxProps}>
+          {labelValue}
+        </Checkbox>
+        <Message messages={errorMessages} isVisible={validationState === 'error'} state="error" />
+      </Col>
   </FormGroup>
   );
 };

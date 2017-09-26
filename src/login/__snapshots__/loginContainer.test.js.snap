@@ -1,0 +1,111 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`LoginContainer Initial render matches snapshot 1`] = `
+<div
+  className="colspan-12 center-block login-form-container"
+>
+  <div
+    className="message-error message-hidden message-size3
+    page-message"
+  />
+  <form
+    className="form-horizontal"
+    onSubmit={[Function]}
+  >
+    <div
+      className="form-group"
+    >
+      <label
+        className="col-xs-4 control-label"
+        htmlFor="username"
+      >
+        Username
+      </label>
+      <div
+        className="col-xs-8"
+      >
+        <input
+          className="credit-cards-text-input form-control"
+          id="username"
+          onChange={[Function]}
+          type="text"
+          value=""
+        />
+        <div
+          className="message-error message-hidden message-size2
+    "
+        />
+      </div>
+    </div>
+    <div
+      className="form-group"
+    >
+      <label
+        className="col-xs-4 control-label"
+        htmlFor="password"
+      >
+        Password
+      </label>
+      <div
+        className="col-xs-8"
+      >
+        <input
+          className="credit-cards-text-input form-control"
+          id="password"
+          onChange={[Function]}
+          type="password"
+          value=""
+        />
+        <div
+          className="message-error message-hidden message-size2
+    "
+        />
+      </div>
+    </div>
+    <div
+      className="form-group"
+    >
+      <div
+        className="col-xs-8 col-xs-offset-4"
+      >
+        <div
+          className="checkbox"
+          style={undefined}
+        >
+          <label
+            title=""
+          >
+            <input
+              checked={undefined}
+              disabled={false}
+              onChange={[Function]}
+              type="checkbox"
+            />
+            Remember Me
+          </label>
+        </div>
+        <div
+          className="message-error message-hidden message-size2
+    "
+        />
+      </div>
+    </div>
+    <div
+      className="form-group"
+    >
+      <div
+        className="col-xs-8 col-xs-offset-4"
+      >
+        <button
+          className="login-submit-button btn login-submit-button btn-default"
+          disabled={false}
+          onClick={undefined}
+          type="submit"
+        >
+          Sign In
+        </button>
+      </div>
+    </div>
+  </form>
+</div>
+`;

@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Link, Redirect } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 import { Form } from 'react-bootstrap';
 import apiClient from '../api/apiClient';
 import CONSTANTS from '../shared/constants';

@@ -3,12 +3,15 @@ module.exports = {
     'eslint:recommended',
     'plugin:import/errors',
     'plugin:import/warnings',
-    'plugin:jsx-a11y/recommended'
+    'plugin:jest/recommended',
+    'plugin:jsx-a11y/recommended',
+    'plugin:react/recommended'
   ],
   plugins: [
     'react',
     'jsx-a11y',
-    'import'
+    'import',
+    'jest'
   ],
   parserOptions: {
     ecmaVersion: 6,
@@ -22,7 +25,7 @@ module.exports = {
     es6: true,
     browser: true,
     node: true,
-    mocha: true
+    jest: true
   },
   rules: {
     'quotes': 0,
@@ -30,12 +33,12 @@ module.exports = {
     'no-debugger': 1,
     'no-var': 1,
     'semi': [1, 'always'],
-    'no-trailing-spaces': 0,
+    'no-trailing-spaces': 1,
     'eol-last': 0,
-    'no-unused-vars': 0,
-    'no-underscore-dangle': 0,
-    'no-alert': 0,
-    'no-lone-blocks': 0,
+    'no-unused-vars': 1,
+    'no-underscore-dangle': 1,
+    'no-alert': 1,
+    'no-lone-blocks': 1,
     'jsx-quotes': 1,
     'react/display-name': [ 1, {'ignoreTranspilerName': false }],
     'react/forbid-prop-types': [1, {'forbid': ['any']}],

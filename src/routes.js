@@ -9,7 +9,7 @@ import Deals from './deals/deals';
 import PrivateRoute from './shared/privateRoute';
 import ErrorPage from './error/error';
 
-const Routes = (store) => {
+const Routes = () => {
   return(
     <main className="row credit-cards-main-content">
       <Switch>

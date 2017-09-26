@@ -13,7 +13,7 @@ class NavMenu extends React.Component {
   }
 
   logout() {
-    apiClient.callCreditCardsApi(CONSTANTS.HTTP_METHODS.POST, '/logout', (response) => { });
+    apiClient.callCreditCardsApi(CONSTANTS.HTTP_METHODS.POST, '/logout', () => { });
     PubSub.publish(CONSTANTS.PUB_SUB.LOGOUT);
   }
 
