@@ -1,9 +1,9 @@
-import webpack from 'webpack';
-import Dotenv from 'dotenv-webpack';
-var HtmlWebpackPlugin = require('html-webpack-plugin');
-import path from 'path';
+const webpack = require('webpack');
+const Dotenv = require('dotenv-webpack');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const path = require('path');
 
-export default {
+module.exports = {
   devtool: 'cheap-module-eval-source-map',
   entry: [
     'babel-polyfill',
