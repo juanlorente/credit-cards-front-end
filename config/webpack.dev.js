@@ -7,7 +7,6 @@ module.exports = {
   devtool: 'cheap-module-eval-source-map',
   entry: [
     'babel-polyfill',
-    'webpack-hot-middleware/client?reload=true',
     path.resolve('src/index')
   ],
   target: 'web',
@@ -17,7 +16,11 @@ module.exports = {
     filename: 'bundle.js'
   },
   devServer: {
-    contentBase: path.resolve('src')
+    contentBase: path.resolve('src'),
+    historyApiFallback: true,
+    hot: true,
+    noInfo: false,
+    port: 3001
   },
   module: {
    loaders: [
@@ -50,7 +53,6 @@ module.exports = {
     ]
   },
   plugins: [
-    new webpack.HotModuleReplacementPlugin(),
     new webpack.NoEmitOnErrorsPlugin(),
     new Dotenv({
       path: './config/dev.env'
