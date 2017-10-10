@@ -53,7 +53,6 @@ module.exports = {
     ]
   },
   plugins: [
-    new webpack.NoEmitOnErrorsPlugin(),
     new Dotenv({
       path: './config/dev.env'
     }),
