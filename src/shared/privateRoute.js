@@ -3,12 +3,14 @@ import PropTypes from 'prop-types';
 import { Route, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { login } from '../login/actions';
+import localforage from 'localforage';
 import CONSTANTS from './constants';
 
 class PrivateRoute extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      isLoading: false,
       loadedPersistedSession: false,
       hasRememberMeToken: false
     };
@@ -16,15 +18,16 @@ class PrivateRoute extends React.Component {
 
   componentWillMount() {
     if(!this.props.sessionId) {
-      let persistedSession = JSON.parse(sessionStorage.getItem(CONSTANTS.LOCAL_STORAGE.SESSION_KEY));
-      if(persistedSession) {
-        this.props.loadPersistedSession(persistedSession.id, persistedSession.user);
+      let hasCurrentSession = JSON.parse(sessionStorage.getItem(CONSTANTS.LOCAL_STORAGE.SESSION_KEY));
+      if(hasCurrentSession) {
+        this.props.loadPersistedSession(hasCurrentSession.id, hasCurrentSession.user);
         this.setState({ loadedPersistedSession : true });
       }
       else {
-        if(localStorage.getItem(CONSTANTS.LOCAL_STORAGE.REMEMBER_ME_KEY) === 'true') {
-          this.setState({ hasRememberMeToken: true });
-        }
+        this.setState({ isLoading: true });
+        localforage.getItem(CONSTANTS.LOCAL_STORAGE.REMEMBER_ME_KEY, (error, value) => {
+          this.setState({ hasRememberMeToken: value, isLoading: false });
+        });
       }
     }
   }
@@ -35,14 +38,15 @@ class PrivateRoute extends React.Component {
 
   render() {
     return (
-      (this.props.sessionId || this.state.loadedPersistedSession || this.state.hasRememberMeToken) ? (
-        <Route {...this.props.routeArgs} component={this.props.component} />
-      ) : (
-        <Redirect to={{
-          pathname: '/login',
-          state: this.props.location
-        }}/>
-      )
+      (this.state.isLoading) ? 'Loading...' :
+        (this.props.sessionId || this.state.loadedPersistedSession || this.state.hasRememberMeToken) ? (
+          <Route {...this.props.routeArgs} component={this.props.component} />
+        ) : (
+          <Redirect to={{
+            pathname: '/login',
+            state: this.props.location
+          }}/>
+        )
     );
   }
 }

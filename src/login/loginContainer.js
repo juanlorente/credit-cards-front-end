@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Redirect } from 'react-router-dom';
 import { Form } from 'react-bootstrap';
+import localforage from 'localforage';
 import apiClient from '../api/apiClient';
 import CONSTANTS from '../shared/constants';
 import Validators from '../shared/validators';
@@ -62,8 +63,8 @@ class LoginContainer extends React.Component {
       this.setState({isInvalidCredentials: false, pageErrorMessages: []});
       apiClient.callCreditCardsApi(CONSTANTS.HTTP_METHODS.POST, '/authenticate', (response) => {
         if(response.status === CONSTANTS.HTTP_STATUS_CODES.OK) {
-          if(this.state.rememberMe) {
-            localStorage.setItem(CONSTANTS.LOCAL_STORAGE.REMEMBER_ME_KEY, 'true');
+          if(this.state.formFields.rememberMe.value) {
+            localforage.setItem(CONSTANTS.LOCAL_STORAGE.REMEMBER_ME_KEY, 'true');
           }
           this.setState({ isLoginSuccessful: true });
         }

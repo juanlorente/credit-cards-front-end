@@ -14,6 +14,7 @@ import axios from 'axios';
 import CONSTANTS from './shared/constants';
 import { login, logout } from './login/actions';
 import { Grid } from 'react-bootstrap';
+import localforage from 'localforage';
 
 const history = createHistory();
 const reducers = combineReducers({ session });
@@ -55,7 +56,7 @@ axios.interceptors.response.use((response) => {
 PubSub.subscribe(CONSTANTS.PUB_SUB.LOGOUT, () => {
   store.dispatch(logout());
   sessionStorage.removeItem(CONSTANTS.LOCAL_STORAGE.SESSION_KEY);
-  localStorage.removeItem(CONSTANTS.LOCAL_STORAGE.REMEMBER_ME_KEY);
+  localforage.removeItem(CONSTANTS.LOCAL_STORAGE.REMEMBER_ME_KEY);
   history.push('/login');
 });
 

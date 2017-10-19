@@ -9,8 +9,8 @@
     "url": "https://github.com/bschneier/credit-cards-front-end"
   },
   "scripts": {
-    "build": "SET NODE_ENV=production& npm-run-all check-security jslint stylelint test compile",
-    "compile": "rimraf dist/*& webpack --config config/webpack.prod.js",
+    "prebuild": "npm-run-all check-security jslint stylelint test",
+    "build": "SET NODE_ENV=production& rimraf dist/*& webpack --config config/webpack.prod.js",
     "prestart": "npm-run-all --parallel check-security stylelint",
     "start": "SET NODE_ENV=development& npm-run-all --parallel test:watch jslint:watch open:dev-server",
     "open:dev-server": "webpack-dev-server --inline --hot --open --config config/webpack.dev.js",
@@ -24,6 +24,7 @@
   "dependencies": {
     "axios": "^0.16.2",
     "babel-polyfill": "^6.26.0",
+    "localforage": "^1.5.2",
     "prop-types": "^15.6.0",
     "pubsub-js": "^1.5.7",
     "react": "^16.0.0",
