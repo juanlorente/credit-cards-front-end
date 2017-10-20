@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import { login } from '../login/actions';
 import localforage from 'localforage';
 import CONSTANTS from './constants';
+import Spinner from './spinner';
 
 class PrivateRoute extends React.Component {
   constructor(props) {
@@ -38,7 +39,7 @@ class PrivateRoute extends React.Component {
 
   render() {
     return (
-      (this.state.isLoading) ? 'Loading...' :
+      (this.state.isLoading) ? <Spinner /> :
         (this.props.sessionId || this.state.loadedPersistedSession || this.state.hasRememberMeToken) ? (
           <Route {...this.props.routeArgs} component={this.props.component} />
         ) : (
