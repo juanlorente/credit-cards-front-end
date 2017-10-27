@@ -1,20 +1,12 @@
 const webpack = require('webpack');
+const webpackMerge = require('webpack-merge');
 const Dotenv = require('dotenv-webpack');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
+const HtmlPlugin = require('html-webpack-plugin');
 const path = require('path');
+const commonConfig = require('./webpack.common.js');
 
-module.exports = {
+module.exports = webpackMerge(commonConfig, {
   devtool: 'cheap-module-eval-source-map',
-  entry: [
-    'babel-polyfill',
-    path.resolve('src/index')
-  ],
-  target: 'web',
-  output: {
-    path: '/dist',
-    publicPath: '/',
-    filename: 'bundle.js'
-  },
   devServer: {
     contentBase: path.resolve('src'),
     historyApiFallback: true,
@@ -22,44 +14,14 @@ module.exports = {
     noInfo: false,
     port: 3001
   },
-  module: {
-   loaders: [
-      {
-        test: /\.js$/,
-        include: path.resolve('src'),
-        loader: 'babel-loader'
-      },
-      {
-        test: /\.s?css$/,
-        include: path.resolve('src/stylesheets'),
-        loaders: ['style-loader', 'css-loader', 'sass-loader']
-      },
-      {
-        test: /\.(jpg|gif)$/,
-        include: path.resolve('media/images'),
-        loader: 'file-loader',
-        options: {
-          name: 'media/images/[name].[ext]'
-        }
-      },
-      {
-        test: /\.mp4$/,
-        include: path.resolve('media/videos'),
-        loader: 'file-loader',
-        options: {
-          name: 'media/videos/[name].[ext]'
-        }
-      }
-    ]
-  },
   plugins: [
     new Dotenv({
       path: './config/dev.env'
     }),
-    new HtmlWebpackPlugin({
+    new HtmlPlugin({
       inject: true,
       template: path.resolve('src/index.html'),
-      favicon: path.resolve('media/favicon.ico')
+      favicon: path.resolve('assets/favicon.ico')
     })
   ]
-};
+});
